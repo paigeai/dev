@@ -6,7 +6,6 @@ all_dependencies=(
   paige-app-boilerplate
   paige-app-middleware
   paige-app-error
-  paige-app-model
   paige-app-db
   paige-app-auth
   paige-app-utils
@@ -18,7 +17,7 @@ declare -A dependency_map=(
   [paige-app-boilerplate]="paige-app-auth paige-app-error paige-app-logger"
   [auth-service]="paige-app-boilerplate paige-app-auth paige-app-db"
   [paige-app-middleware]="paige-app-error"
-  [paige-app-auth]="paige-app-model paige-app-error"
+  [paige-app-auth]="paige-app-db paige-app-error"
 );
 
 for d in "${all_dependencies[@]}"; do
