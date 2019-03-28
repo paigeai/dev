@@ -4,7 +4,6 @@ set -e;
 
 all_dependencies=(
   paige-app-boilerplate
-  paige-app-server
   paige-app-middleware
   paige-app-error
   paige-app-model
@@ -16,9 +15,8 @@ all_dependencies=(
 );
 
 declare -A dependency_map=(
-  [paige-app-server]="paige-app-logger"
-  [paige-app-boilerplate]="paige-app-auth paige-app-error"
-  [auth-service]="paige-app-server paige-app-boilerplate paige-app-auth"
+  [paige-app-boilerplate]="paige-app-auth paige-app-error paige-app-logger"
+  [auth-service]="paige-app-boilerplate paige-app-auth paige-app-db"
   [paige-app-middleware]="paige-app-error"
   [paige-app-auth]="paige-app-model paige-app-error"
 );
@@ -29,9 +27,9 @@ for d in "${all_dependencies[@]}"; do
 done;
 
 for K in "${!dependency_map[@]}"; do
-  cd ${PAIGE_HOME}/$K;
+  cd ${PAIGE_HOME}/${K};
 
-  module_dependencies=${DEPENDENCY_MAP[${K}]};
+  module_dependencies=${dependency_map[${K}]};
 
   for d in $module_dependencies
   do
